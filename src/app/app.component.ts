@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {Todo} from './model/todo';
+import {TodoService} from './todo.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  public todos: Todo[];
+
+  constructor(private readonly _todoService: TodoService) {
+    this.todos = this._todoService.getAll();
+  }
 }
