@@ -1,16 +1,17 @@
-import { Injectable } from '@angular/core';
-import { Todo } from './model/todo';
-import { Observable, of, throwError } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import {environment} from '../environments/environment';
+import {Todo} from './model/todo';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TodoService {
-  private url = 'http://localhost:8080';
+  private readonly url = environment.baseUrl;
 
-  constructor(private readonly _httpClient: HttpClient) {}
+  constructor(private readonly _httpClient: HttpClient) {
+  }
 
   public get(id: number): Observable<Todo> {
     return this._httpClient.get<Todo>(`${this.url}/todos/${id}`);
