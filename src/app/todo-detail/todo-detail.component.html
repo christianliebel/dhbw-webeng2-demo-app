@@ -1,0 +1,4 @@
+<span id="spinner" *ngIf="loading">LOADING…</span>
+<span [hidden]="loading">{{ todo$ | async | json }}</span>
+
+<a routerLink="..">Back</a>

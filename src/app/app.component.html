@@ -13,17 +13,8 @@
         </h1>
       </header>
       <div class="content">
-        <h2 *ngIf="todos$ | async as todos">
-          You have {{ todos.length }} todos!
-        </h2>
-        <app-todo *ngFor="let todo of todos$ | async" [todo]="todo"></app-todo>
+        <router-outlet></router-outlet>
       </div>
     </div>
-    <app-blogpost>
-      <img src="https://via.placeholder.com/200x200">
-      <h2>Very interesting topic</h2>
-      <p>So much angular!</p>
-      <p>So much wow!</p>
-    </app-blogpost>
   </div>
 </div>
