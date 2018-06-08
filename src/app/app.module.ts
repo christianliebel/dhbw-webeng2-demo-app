@@ -5,6 +5,8 @@ import { NgModule } from '@angular/core';
 import {RouterModule} from '@angular/router';
 
 import { AppComponent } from './app.component';
+import {CameraService} from './camera/camera.service';
+import {CameraServiceFactory} from './camera/camera.service.factory';
 import { TodoComponent } from './todo/todo.component';
 import { BlogpostComponent } from './blogpost/blogpost.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
@@ -40,7 +42,10 @@ import { TodoNewComponent } from './todo-new/todo-new.component';
       pathMatch: 'full'
     }], {useHash: true})
   ],
-  providers: [],
+  providers: [{
+    provide: CameraService,
+    useFactory: CameraServiceFactory
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

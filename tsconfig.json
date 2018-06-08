@@ -10,7 +10,11 @@
     "experimentalDecorators": true,
     "target": "es5",
     "typeRoots": [
-      "node_modules/@types"
+      "node_modules/@types",
+      "node_modules/cordova-plugin-camera"
+    ],
+    "types": [
+      "cordova-plugin-camera"
     ],
     "lib": [
       "es2017",

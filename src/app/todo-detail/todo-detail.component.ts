@@ -2,6 +2,7 @@ import {Component, OnDestroy} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Observable, Subscription} from 'rxjs';
 import {map, pluck, switchMap, tap} from 'rxjs/operators';
+import {CameraService} from '../camera/camera.service';
 import {Todo} from '../model/todo';
 import {TodoService} from '../todo.service';
 
@@ -12,12 +13,14 @@ import {TodoService} from '../todo.service';
 })
 export class TodoDetailComponent implements OnDestroy {
   public loading = true;
-  private todo$: Observable<Todo>;
+  public todo$: Observable<Todo>;
+  public image$: Observable<string>;
   private subscription: Subscription;
 
   constructor(activatedRoute: ActivatedRoute,
               private readonly todoService: TodoService,
-              private readonly router: Router) {
+              private readonly router: Router,
+              private readonly cameraService: CameraService) {
     this.todo$ = activatedRoute.params.pipe(
       tap(() => this.loading = true),
       pluck('id'),
@@ -36,5 +39,9 @@ export class TodoDetailComponent implements OnDestroy {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
+  }
+
+  public takePicture(): void {
+    this.image$ = this.cameraService.getPicture();
   }
 }

@@ -8,4 +8,7 @@
   <button [disabled]="form.invalid">Abschicken</button>
 </form>
 
+<img [src]="image" *ngIf="image$ | async as image">
+<button (click)="takePicture()">Bitte schön lächeln</button>
+
 <a routerLink="..">Back</a>
