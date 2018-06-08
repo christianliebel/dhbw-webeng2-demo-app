@@ -1,12 +1,11 @@
 <span id="spinner" *ngIf="loading">LOADING…</span>
-<form *ngIf="todo$ | async as todo" (ngSubmit)="onSubmit(todo)">
-  {{ todo | json }}
+<form *ngIf="todo$ | async as todo" (ngSubmit)="onSubmit(todo)" #form="ngForm">
   <label>
     <input type="checkbox" [(ngModel)]="todo.done" name="done">
     Ist fertig
   </label>
-  <input type="text" [(ngModel)]="todo.name" name="name">
-  <button>Abschicken</button>
+  <input type="text" [(ngModel)]="todo.name" name="name" minlength="5">
+  <button [disabled]="form.invalid">Abschicken</button>
 </form>
 
 <a routerLink="..">Back</a>

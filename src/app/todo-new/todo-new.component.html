@@ -1,0 +1,5 @@
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit(form.value)" #form="ngForm">
+  <input type="checkbox" formControlName="done">
+  <input type="text" formControlName="name">
+  <button [disabled]="form.invalid">Abschicken</button>
+</form>
