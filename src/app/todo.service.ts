@@ -1,31 +1,34 @@
-import {Injectable} from '@angular/core';
-import {Todo} from './model/todo';
+import { Injectable } from '@angular/core';
+import { Todo } from './model/todo';
+import { Observable, of, throwError } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TodoService {
-  public get(id: number): Todo {
-    throw new Error('Not implemented');
+  private url = 'http://localhost:8080';
+
+  constructor(private readonly _httpClient: HttpClient) {}
+
+  public get(id: number): Observable<Todo> {
+    return this._httpClient.get<Todo>(`${this.url}/todos/${id}`);
   }
 
-  public getAll(): Todo[] {
-    return [
-      { name: 'Wäsche waschen', id: 1, done: false },
-      { name: 'Bügeln', id: 1, done: false },
-      { name: 'Zimmer aufräumen', id: 1, done: false },
-    ];
+  public getAll(): Observable<Todo[]> {
+    return this._httpClient.get<Todo[]>(`${this.url}/todos`);
   }
 
-  public create(id: number): Todo {
-    throw new Error('Not implemented');
+  public create(todo: Todo): Observable<Todo> {
+    return this._httpClient.post<Todo>(`${this.url}/todos`, todo);
   }
 
-  public update(id: number): void {
-    throw new Error('Not implemented');
+  public update(todo: Todo): Observable<void> {
+    return this._httpClient.put<void>(`${this.url}/todos/${todo.id}`, todo);
   }
 
-  public delete(id: number): Todo {
-    throw new Error('Not implemented');
+  public delete(id: number): Observable<any> {
+    return this._httpClient.delete<void>(`${this.url}/todos/${id}`);
   }
 }
